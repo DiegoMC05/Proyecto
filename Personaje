@@ -1,0 +1,51 @@
+public class Personaje {
+protected String nombre,color, nommascota,animal;    
+protected int edad;
+
+public Personaje(){
+    this.nombre = "Invitado";
+    this.color = "...";
+    this.nommascota = "...";
+    this.edad = 0;
+} 
+public void setNombre(String n){
+    nombre = n;
+}
+public void setColor(String c){
+    color=c;
+}
+public void setEdad(int e){
+    edad=e;
+}
+public void setNommascota(String masc){
+    nommascota = masc;
+}
+public void setAnimal(String animale){
+    animal=animale;
+}
+public String getColor(){
+    return color;
+}
+public int getEdad(){
+    return edad;
+}
+public String getNombre(){
+    return nombre;
+}
+public String getNommascota(){
+    return nommascota;
+}
+public String getAnimal(){
+    return animal;
+}
+public void mostrarDatos(){
+    
+System.out.println("Nombre: "+ nombre);
+System.out.println("Edad: "+ edad);
+System.out.println("Color favorito: "+ color);
+System.out.println("Nombre de tu mascota: "+ nommascota);
+
+}
+
+}
+
