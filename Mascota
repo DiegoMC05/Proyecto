@@ -1,0 +1,9 @@
+public class Mascota extends Personaje{
+    public Mascota(){
+        super();
+    }
+    public void animar(){
+        System.out.println(nommascota + "anima a su dueño");
+        System.out.println(nommascota + "anima a su dueño");
+    }
+}
