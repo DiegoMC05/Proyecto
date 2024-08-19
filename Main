@@ -1,0 +1,63 @@
+package com.mycompany.main;
+
+import java.util.Scanner;
+import java.util.Random;
+
+public class Main {
+    public static void main(String[] args) {
+        try (Scanner sc = new Scanner(System.in)) {
+            Random rand = new Random();
+            int op;
+            char resp = 's';
+            String n, masc, c;
+            int e;
+            Personaje P1 = new Personaje();
+            Enemigo E1 = new Enemigo(); // Crear el objeto Enemigo
+            EnemigoTipoA EA1 = new EnemigoTipoA();
+            EnemigoTipoB EB1 = new EnemigoTipoB();
+            Mascota M1 = new Mascota();
+            Anagramas juegoAnagramas = new Anagramas();
+
+            // Inicializar el juego de Destino Final con Enemigo
+            JuegoDestinoFinal juegoDestinoFinal = new JuegoDestinoFinal(P1, E1);
+
+            do {
+                System.out.println("1. Crear personaje");
+                System.out.println("2. Consultar datos");
+                System.out.println("3. Jugar trivia");
+                System.out.println("4. Jugar buscaminas");
+                System.out.println("5. Jugar simulador de tenis");
+                System.out.println("6. Jugar Anagramas");
+                System.out.println("7. Jugar Destino Final");
+                System.out.print("Seleccione operación: ");
+                op = sc.nextInt();
+                sc.nextLine(); // Consumir la nueva línea
+                
+                switch (op) {
+                    case 1 -> {
+                        System.out.println("\nInformación general del objeto persona\n");
+                        P1.mostrarDatos();
+                        System.out.print("Introduce el nuevo nombre: ");
+                        n = sc.nextLine();
+                        P1.setNombre(n);
+                        System.out.print("Edad: ");
+                        e = sc.nextInt();
+                        sc.nextLine(); // Consumir la nueva línea
+                        P1.setEdad(e);
+                        System.out.print("Color favorito: ");
+                        c = sc.nextLine();
+                        P1.setColor(c);
+                        System.out.print("Nombre de tu mascota: ");
+                        masc = sc.nextLine();
+                        P1.setNommascota(masc);
+                    }
+                    case 2 -> {
+                        P1.mostrarDatos();
+                        System.out.println("Salud: " + E1.getSalud());
+                        System.out.println("Fuerza: " + E1.getFuerza());
+                    }
+                    case 3 -> {
+                        System.out.println("Recuerda que si tu vida llega a cero morirás, las respuestas siempre van en minúsculas y sin acentos");
+                        pausa(sc);
+                        limpiarPantalla();
+}
