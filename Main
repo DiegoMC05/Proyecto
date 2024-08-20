@@ -25,7 +25,7 @@ public class Main {
                 System.out.println("1. Crear personaje");
                 System.out.println("2. Consultar datos");
                 System.out.println("3. Jugar trivia");
-                System.out.println("4. Jugar buscaminas");
+                System.out.println("4. Jugar gato");
                 System.out.println("5. Jugar simulador de tenis");
                 System.out.println("6. Jugar Anagramas");
                 System.out.println("7. Jugar Destino Final");
@@ -60,4 +60,155 @@ public class Main {
                         System.out.println("Recuerda que si tu vida llega a cero morirás, las respuestas siempre van en minúsculas y sin acentos");
                         pausa(sc);
                         limpiarPantalla();
+                        
+                        // Nivel 1
+                        int[] preguntasNivel1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+                        barajarArray(preguntasNivel1);
+                        jugarNivel(sc, M1, E1, preguntasNivel1, 0, 10);
+
+                        // Nivel 2
+                        System.out.print("Has pasado este nivel, presiona 's' para volver al menú o 'n' para jugar el nivel 2: ");
+                        resp = sc.next().charAt(0);
+                        sc.nextLine(); // Consumir la nueva línea
+                        if (resp == 'n') {
+                            int[] preguntasNivel2 = {11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
+                            barajarArray(preguntasNivel2);
+                            jugarNivel(sc, M1, EA1, preguntasNivel2, 11, 20);
+                        }
+                        if (resp == 's') {
+                            break;
+                        }
+
+                        // Nivel 3
+                        System.out.print("Presiona 's' para volver al menú o 'n' para jugar el nivel 3: ");
+                        resp = sc.next().charAt(0);
+                        sc.nextLine(); // Consumir la nueva línea
+                        if (resp == 'n') {
+                            int[] preguntasNivel3 = {21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+                            barajarArray(preguntasNivel3);
+                            jugarNivel(sc, M1, EB1, preguntasNivel3, 21, 30);
+                        }
+                    }
+                    case 4 -> {
+                     System.out.println("\n--- Menú del Gato ---");
+                        System.out.println("1. Jugar Gato");
+                        System.out.println("2. Ver registro de juegos");
+                        System.out.print("Seleccione operacion: ");
+                        int gatoOp = sc.nextInt();
+                        sc.nextLine(); // Consumir la nueva línea
+
+                        if (gatoOp == 1) {
+                            juegoGato.jugar();
+                        } else if (gatoOp == 2) {
+                            juegoGato.imprimirRegistroJuegos();
+                        } else {
+                            System.out.println("Opción no válida.");
+                        }
+                    }
+                    case 5 -> {
+                        Tenis juegoTenis = new Tenis();
+                        juegoTenis.jugar();
+                    }
+                    case 6 -> {
+                        System.out.println("1. Jugar Anagramas");
+                        System.out.println("2. Consultar Records");
+                        System.out.print("Seleccione operacion: ");
+                        int subOp = sc.nextInt();
+                        sc.nextLine(); // Consumir la nueva línea
+
+                        switch (subOp) {
+                            case 1 -> {
+                                // Palabras y sus versiones desordenadas
+                                String[][] palabras = {
+                                    {"JAVA", "AJVA"},
+                                    {"DESARROLLO", "SERLODLOAR"},
+                                    {"PROGRAMACION", "OARCNAPRIMOG"},
+                                    {"ALGORITMO", "LTOGIRMOA"},
+                                    {"SOFTWARE", "TSAFREWO"},
+                                    {"DIAGRAMA", "AGRIMADA"},
+                                    {"ABSTRACCION", "TCCOTRAINBAS"},
+                                    {"CLASES", "ESLCSA"},
+                                    {"VARIABLE", "BAELIRAV"},
+                                    {"METODO", "ODTOME"},
+                                    {"OBJETO", "TBJEOO"},
+                                    {"INTERFAZ", "FAZINERT"},
+                                    {"CONSTRUCTOR", "TCTOUORNC"},
+                                    {"HERENCIA", "IHNAECR"},
+                                    {"POLIMORFISMO", "ISLFOPRIMOM"}
+                                };
+
+                                System.out.println("Bienvenido al Juego de Anagramas. ¡Ordena las palabras antes de que sea demasiado tarde!");
+
+                                int puntaje = 0; // Puntaje inicial
+                                for (int i = 0; i < palabras.length; i++) {
+                                    String palabraOriginal = palabras[i][0];
+                                    String palabraDesordenada = palabras[i][1];
+                                    boolean continuar = juegoAnagramas.jugar(palabraOriginal, palabraDesordenada, sc);
+                                    if (!continuar) {
+                                        System.out.println("Juego terminado. Tu puntaje final es: " + puntaje);
+                                        juegoAnagramas.agregarRecord(puntaje); // Agrega el puntaje a los records
+                                        break; // Regresa al menú si se comete un error
+                                    }
+                                    puntaje++;
+                                }
+
+                                juegoAnagramas.agregarRecord(puntaje);
+                                System.out.println("¡Felicidades!");
+                            }
+                            case 2 -> juegoAnagramas.mostrarRecords();
+                            default -> System.out.println("Opción no válida.");
+                        }
+                    }
+                    case 7 -> {
+                        // Iniciar el juego de destino final
+                        System.out.println("¡Bienvenido a Destino Final!");
+                        juegoDestinoFinal.iniciarJuego();
+                    }
+                    default -> System.out.println("Opción no válida.");
+                }
+            } while (resp == 's');
+        }
+    }
+
+    public static void barajarArray(int[] array) {
+        Random rand = new Random();
+        for (int i = 0; i < array.length; i++) {
+            int j = rand.nextInt(array.length);
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
+
+    public static void limpiarPantalla() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+    public static void pausa(Scanner sc) {
+        System.out.println("Presione Enter para continuar...");
+        sc.nextLine();
+    }
+
+    public static void jugarNivel(Scanner sc, Mascota M1, Enemigo E, int[] preguntas, int inicio, int fin) {
+        limpiarPantalla();
+        M1.animar();
+        for (int i = 0; i < 5; i++) {
+            boolean correcta = Preguntas.pregunta(sc, preguntas[i]);
+            limpiarPantalla();
+            if (correcta) {
+                System.out.println("¡Felicidades!");
+                E.perder();
+            } else {
+                E.daniar();
+                if (E.getSalud() <= 0 || E.getFuerza() <= 0) {
+                    E.daniofatal();
+                    E.setSalud(75);
+                    E.setFuerza(100);
+                    break;
+                }
+            }
+        }
+    }
 }
+
